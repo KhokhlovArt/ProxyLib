@@ -88,6 +88,8 @@ public class HttpsConnectionServicer {
         try {
             connection = getSimpleHttpsConnection(new URL(path));
             if (connection != null) {
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
                 connection.connect();
                 int resCode = connection.getResponseCode();
                 Logger.log("code = " + connection.getResponseCode());

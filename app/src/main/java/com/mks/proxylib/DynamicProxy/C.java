@@ -15,7 +15,7 @@ public class C {
     public static String URL_TO_CHECK = "https://ya.ru/";           // URL по которому проверяем соединение с интернетом ( нужно ли включать проксирование)
 
     //Список URL по которому проверяем соединение с интернетом ( нужно ли включать проксирование)
-    public static String [] ARR_URL_TO_CHECK = {"https://prestable.voiceservices.yandex.net", "https://voicestation.yandex.net", "https://voiceservices.yandex.net"/*, "https://uniproxy.alice.yandex.net"*/};
+    public static String [] ARR_URL_TO_CHECK = {/*"https://prestable.voiceservices.yandex.net",*/ "https://voicestation.yandex.net",/* "https://voiceservices.yandex.net"/*, "https://uniproxy.alice.yandex.net"*/};
 
     public static String ConfigFilePathZip(Context cnt) {return  "" + getBasePath(cnt) + CONFIG_FILE_NAME_ZIP;}
     public static String ConfigFilePath(Context cnt)    {return  "" + getBasePath(cnt) + CONFIG_FILE_NAME;}
@@ -34,17 +34,19 @@ public class C {
     static public List<ProxyParams> getDefaultProxys()
     {
         List<ProxyParams> proxys = new ArrayList<ProxyParams>();
-        proxys.add(new ProxyParams().setHost("195.201.23.138").setPort("65233").setUsername("").setPassword("").setTimeout(0));
-        proxys.add(new ProxyParams().setHost("195.201.251.246").setPort("65233").setUsername("").setPassword("").setTimeout(0));
-        proxys.add(new ProxyParams().setHost("195.201.252.9").setPort("65233").setUsername("").setPassword("").setTimeout(0));
-        proxys.add(new ProxyParams().setHost("195.201.252.13").setPort("65233").setUsername("").setPassword("").setTimeout(0));
-        proxys.add(new ProxyParams().setHost("195.201.252.40").setPort("65233").setUsername("").setPassword("").setTimeout(0));
-        proxys.add(new ProxyParams().setHost("195.201.252.55").setPort("65233").setUsername("").setPassword("").setTimeout(0));
-        proxys.add(new ProxyParams().setHost("195.201.252.93").setPort("65233").setUsername("").setPassword("").setTimeout(0));
-        proxys.add(new ProxyParams().setHost("195.201.252.234").setPort("65233").setUsername("").setPassword("").setTimeout(0));
-        proxys.add(new ProxyParams().setHost("195.201.252.251").setPort("65233").setUsername("").setPassword("").setTimeout(0));
-        proxys.add(new ProxyParams().setHost("195.201.253.10").setPort("65233").setUsername("").setPassword("").setTimeout(0));
-        proxys.add(new ProxyParams().setHost("195.201.253.15").setPort("65233").setUsername("").setPassword("").setTimeout(0));
+
+        proxys.add(new ProxyParams().setHost("212.129.1.232").setPort("80").setUsername("").setPassword("").setTimeout(0)); //Наш
+        proxys.add(new ProxyParams().setHost("195.201.251.246").setPort("65233").setUsername("").setPassword("").setTimeout(0)); //Берлин
+        proxys.add(new ProxyParams().setHost("195.201.252.9").setPort("65233").setUsername("").setPassword("").setTimeout(0)); //Берлин
+        proxys.add(new ProxyParams().setHost("195.201.252.13").setPort("65233").setUsername("").setPassword("").setTimeout(0));//Берлин
+        proxys.add(new ProxyParams().setHost("195.201.252.40").setPort("65233").setUsername("").setPassword("").setTimeout(0));//Берлин
+        proxys.add(new ProxyParams().setHost("195.201.252.55").setPort("65233").setUsername("").setPassword("").setTimeout(0));//Берлин
+        proxys.add(new ProxyParams().setHost("195.201.252.93").setPort("65233").setUsername("").setPassword("").setTimeout(0));//Берлин
+        proxys.add(new ProxyParams().setHost("195.201.252.234").setPort("65233").setUsername("").setPassword("").setTimeout(0));//Берлин
+        proxys.add(new ProxyParams().setHost("195.201.252.251").setPort("65233").setUsername("").setPassword("").setTimeout(0));//Берлин
+        proxys.add(new ProxyParams().setHost("195.201.253.10").setPort("65233").setUsername("").setPassword("").setTimeout(0));//Берлин
+        proxys.add(new ProxyParams().setHost("195.201.253.15").setPort("65233").setUsername("").setPassword("").setTimeout(0));//Берлин
+        proxys.add(new ProxyParams().setHost("195.201.23.138").setPort("65233").setUsername("").setPassword("").setTimeout(0)); //Спб
 
 //        proxys.add(new ProxyParams().setHost("191.101.148.97").setPort("65233").setUsername("pmorgay").setPassword("V3u5ZkW").setTimeout(0));
 //        proxys.add(new ProxyParams().setHost("181.215.83.183").setPort("65233").setUsername("pmorgay").setPassword("V3u5ZkW").setTimeout(0));

@@ -32,50 +32,56 @@ public class DynamicProxy {
     //Метод устанавливает Proxy
     public static void setProxy(Context cnt)
     {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        //Включаем проксирование
-        List<ProxyParams> listOfProxy = getProxys(cnt);
 
-        for(ProxyParams p: listOfProxy)
-        {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+                //Включаем проксирование
+                List<ProxyParams> listOfProxy = getProxys(cnt);
 
-            boolean hasConnection = true;
-            for (int i = 0 ; i < C.ARR_URL_TO_CHECK.length ; i++) {
-                //Если доступ появился, выходим.
-                if (new HttpsConnectionServicer().checkInternetConnection(C.ARR_URL_TO_CHECK[i]) == false) {
-                    hasConnection = false;
-                    break;
-                }
-            }
+                for (ProxyParams p : listOfProxy) {
 
-            if (hasConnection)
-            {
-                break;
-            }
-
-            Logger.log("" + p.getHost());
-            String host = p.getHost();
-            String port = p.getPort();
-            String getHTTPUsername = p.getUsername();
-            String getHTTPPassword = p.getPassword();
+                    boolean hasConnection = true;
+Log.e("!!!", "checkInternetConnection");
+                    for (int i = 0; i < C.ARR_URL_TO_CHECK.length; i++) {
+                        //Если доступ появился, выходим.
+                        if (new HttpsConnectionServicer().checkInternetConnection(C.ARR_URL_TO_CHECK[i]) == false) {
+                            hasConnection = false;
+                            break;
+                        }
+                    }
+Log.e("!!!", "InternetConnection - " + hasConnection);
+                    if (hasConnection) {
+                        break;
+                    }
+                    Logger.log("" + p.getHost());
+Log.e("!!!", "set Proxy " + p.getHost());
+                    String host = p.getHost();
+                    String port = p.getPort();
+                    String getHTTPUsername = p.getUsername();
+                    String getHTTPPassword = p.getPassword();
 
 //Logger.log("" + host + ":" + port + " [" + getHTTPUsername + "/" + getHTTPPassword + "]");
-            Properties properties  = System.getProperties();
-            properties.setProperty("http.proxyHost", host);
-            properties.setProperty("http.proxyPort", port);
-            properties.setProperty("https.proxyHost", host);
-            properties.setProperty("https.proxyPort", port);
+                    Properties properties = System.getProperties();
+                    properties.setProperty("http.proxyHost", host);
+                    properties.setProperty("http.proxyPort", port);
+                    properties.setProperty("https.proxyHost", host);
+                    properties.setProperty("https.proxyPort", port);
 
-            System.getProperties().put("http.proxyUser", getHTTPUsername);
-            System.getProperties().put("http.proxyPassword", getHTTPPassword);
-            System.getProperties().put("https.proxyUser", getHTTPUsername);
-            System.getProperties().put("https.proxyPassword", getHTTPPassword);
-            Authenticator.setDefault(new ProxyAuthenticator(getHTTPUsername, getHTTPPassword));
-        }
+                    System.getProperties().put("http.proxyUser", getHTTPUsername);
+                    System.getProperties().put("http.proxyPassword", getHTTPPassword);
+                    System.getProperties().put("https.proxyUser", getHTTPUsername);
+                    System.getProperties().put("https.proxyPassword", getHTTPPassword);
+                    Authenticator.setDefault(new ProxyAuthenticator(getHTTPUsername, getHTTPPassword));
+                }
 
-        //Скачиваем новые настройки
-        updateNodes(cnt);
+                //Скачиваем новые настройки
+                updateNodes(cnt);
+
+            }
+        });
     }
 
 
